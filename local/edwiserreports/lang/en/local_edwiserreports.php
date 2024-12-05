@@ -322,7 +322,7 @@ $string['dateofenrol'] = 'Date of Enrolment';
 $string['grade'] = 'Grade';
 $string['courseprogress'] = 'Course Progress';
 $string['notenrolled'] = 'User Not Enrolled';
-$string['searchcertificates'] = 'by learner';
+$string['searchcertificates'] = 'by certificates';
 
 /* Site Access Block*/
 $string['sun'] = 'SUN';

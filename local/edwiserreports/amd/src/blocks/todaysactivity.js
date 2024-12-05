@@ -26,13 +26,6 @@ define('local_edwiserreports/blocks/todaysactivity', [
     'local_edwiserreports/defaultconfig',
     'local_edwiserreports/common'
 ], function($, ApexCharts, CFG, common) {
-
-    /*
-    * Rtl
-    */
-    var rtl = $('html').attr('dir') == 'rtl' ? 1 : 0;
-
-
     /**
      * Initialize
      * @param {function} invalidUser Callback function
@@ -58,7 +51,7 @@ define('local_edwiserreports/blocks/todaysactivity', [
                  * date filter in todays activity block
                  */
                 $(flatpickrCalender).flatpickr({
-                    dateFormat: rtl ? "Y M d" : "d M Y",
+                    dateFormat: "d M Y",
                     maxDate: "today",
                     defaultDate: ["today"],
                     // eslint-disable-next-line no-unused-vars

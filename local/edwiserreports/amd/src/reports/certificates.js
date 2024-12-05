@@ -41,7 +41,6 @@ define('local_edwiserreports/reports/certificates', [
         CERTIFICATE: "#certificates .certificate-select",
         SEARCH: "#certificates .table-search-input input",
         LENGTH: "#certificates .length-select",
-        FORMFILTER: '#certificates .download-links [name="filter"]'
     };
 
     /**
@@ -54,8 +53,7 @@ define('local_edwiserreports/reports/certificates', [
      */
     var filter = {
         cohort: 0,
-        certificateid: 0,
-        dir: $('html').attr('dir')
+        certificateid: 0
     };
 
     /**
@@ -173,22 +171,18 @@ define('local_edwiserreports/reports/certificates', [
      */
     function init(CONTEXTID) {
         /* eslint-enable no-unused-vars */
+
         // Initialize select2.
         $(document).find('.singleselect').select2();
 
         filter.certificateid = $(SELECTOR.CERTIFICATE).val();
-
-        $(SELECTOR.FORMFILTER).val(JSON.stringify(filter));
-
         loadData();
 
         // Certificate change.
         $(document).on("change", SELECTOR.CERTIFICATE, function() {
             filter.certificateid = $(this).val();
             loadData();
-            // $('.download-links input[name="filter"]').val(filter.certificateid);
-            $(SELECTOR.FORMFILTER).val(JSON.stringify(filter));
-
+            $('.download-links input[name="filter"]').val(filter.certificateid);
         });
 
         // Handle cohort change.

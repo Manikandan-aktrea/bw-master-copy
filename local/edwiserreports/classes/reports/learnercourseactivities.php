@@ -709,7 +709,7 @@ class learnercourseactivities extends base {
                 array(                    
                     'icon'  => file_get_contents($CFG->dirroot . '/local/edwiserreports/pix/summary-card/marks.svg'),
                     'title' => get_string('marks', 'local_edwiserreports'),
-                    'data'  => round($marks, 2)
+                    'data'  => $marks
                 ),
                 array(                    
                     'icon'  => file_get_contents($CFG->dirroot . '/local/edwiserreports/pix/summary-card/grade.svg'),

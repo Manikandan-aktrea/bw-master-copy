@@ -76,8 +76,7 @@ define('local_edwiserreports/reports/courseactivitycompletion', [
         group: 0,
         enrolment: 'all',
         groupname: '',
-        dir: $('html').attr('dir'),
-        rtl: $('html').attr('dir') == 'rtl' ? 1 : 0
+        dir: $('html').attr('dir')
     };
 
     /**
@@ -164,14 +163,8 @@ define('local_edwiserreports/reports/courseactivitycompletion', [
                         {
                             data: 'completedon',
                             render: function(data) {
-                                let tempdate = common.formatDate(new Date(data * 1000), "d MMM yyyy");
-                                let rtl = $('html').attr('dir') == 'rtl' ? 1 : 0
-
-                                if(rtl){
-                                    tempdate = common.formatDate(new Date(data * 1000), "yyyy MMM d");
-                                }
-                                return `<p class="erp-time-rtl"><span class="d-none">${data}</span>` +
-                                    (data == 0 ? '-' : tempdate) + '</p>';
+                                return `<span class="d-none">${data}</span>` +
+                                    (data == 0 ? '-' : common.formatDate(new Date(data * 1000), "d MMM yyyy"));
                             },
                             width: "10rem"
                         },
@@ -179,45 +172,24 @@ define('local_edwiserreports/reports/courseactivitycompletion', [
                         {
                             data: 'gradedon',
                             render: function(data) {
-                                let tempdate = common.formatDate(new Date(data * 1000), "d MMM yyyy");
-                                let rtl = $('html').attr('dir') == 'rtl' ? 1 : 0
-
-                                if(rtl){
-                                    tempdate = common.formatDate(new Date(data * 1000), "yyyy MMM d");
-                                }
-
-                                return `<p class="erp-time-rtl"><span class="d-none">${data}</span>` +
-                                    (data == 0 ? '-' : tempdate) + '</p>';
+                                return `<span class="d-none">${data}</span>` +
+                                    (data == 0 ? '-' : common.formatDate(new Date(data * 1000), "d MMM yyyy"));
                             },
                             width: "10rem"
                         },
                         {
                             data: 'firstaccess',
                             render: function(data) {
-                                let tempdate = common.formatDate(new Date(data * 1000), "d MMM yyyy hh:mm TT").substring(0,11) + '<br>' + common.formatDate(new Date(data * 1000), "d MMM yyyy hh:mm TT").substring(11,20);
-                                let rtl = $('html').attr('dir') == 'rtl' ? 1 : 0
-
-                                if(rtl){
-                                    tempdate = common.formatDate(new Date(data * 1000), "TT mm:hh yyyy MMM d").substring(8, 20) + '<br>' + common.formatDate(new Date(data * 1000), "TT mm:hh yyyy MMM d").substring(0,8);
-                                }
-
-                                return `<p class="erp-time-rtl"><span class="d-none">${data}</span>` +
-                                    (data == 0 ? never : tempdate ) + '</p>';
+                                return `<span class="d-none">${data}</span>` +
+                                    (data == 0 ? never : common.formatDate(new Date(data * 1000), "d MMM yyyy hh:mm TT").substring(0,11) + '<br>' + common.formatDate(new Date(data * 1000), "d MMM yyyy hh:mm TT").substring(11,20));
                                 },
                             width: "9rem"
                         },
                         {
                             data: 'lastaccess',
                             render: function(data) {
-                                let tempdate = common.formatDate(new Date(data * 1000), "d MMM yyyy hh:mm TT").substring(0,11) + '<br>' + common.formatDate(new Date(data * 1000), "d MMM yyyy hh:mm TT").substring(11,20);
-                                let rtl = $('html').attr('dir') == 'rtl' ? 1 : 0
-
-                                if(rtl){
-                                    tempdate = common.formatDate(new Date(data * 1000), "TT mm:hh yyyy MMM d").substring(8, 20) + '<br>' + common.formatDate(new Date(data * 1000), "TT mm:hh yyyy MMM d").substring(0,8);
-                                }
-
-                                return `<p class="erp-time-rtl"><span class="d-none">${data}</span>` +
-                                    (data == 0 ? never : tempdate) + '</p>';
+                                return `<span class="d-none">${data}</span>` +
+                                    (data == 0 ? never : common.formatDate(new Date(data * 1000), "d MMM yyyy hh:mm TT").substring(0,11) + '<br>' + common.formatDate(new Date(data * 1000), "d MMM yyyy hh:mm TT").substring(11,20));
                             },
                             width: "9rem"
                         },
@@ -225,7 +197,7 @@ define('local_edwiserreports/reports/courseactivitycompletion', [
                         {
                             data: 'timespent',
                             render: function(data) {
-                                return common.timeFormatter(data, [], filter.rtl);
+                                return common.timeFormatter(data);
                             }
                         }
                     ],
@@ -333,8 +305,6 @@ define('local_edwiserreports/reports/courseactivitycompletion', [
     function init() {
 
         filter = JSON.parse($(SELECTOR.FORMFILTER).val());
-
-        filter.rtl = $('html').attr('dir') == 'rtl' ? 1 : 0;
 
         // Show time period in table info.
         common.updateTimeLabel('all');

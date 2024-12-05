@@ -245,14 +245,13 @@ class courseactivitiessummary extends base {
                   FROM {{$userstable}} ut
                   JOIN {grade_grades} gg ON ut.tempid = gg.userid
                   JOIN {grade_items} gi ON gi.id = gg.itemid
-                  JOIN {course_modules} cm ON cm.course = :course1
+                  JOIN {course_modules} cm ON cm.course = gi.courseid
                                            AND cm.instance = gi.iteminstance
                                            AND gi.itemtype = :itemtype
                   JOIN {modules} m ON cm.module = m.id AND m.name = gi.itemmodule
                  WHERE cm.course = :course
               GROUP BY cm.id, gi.grademax, gi.gradepass";
-        $grades = $DB->get_records_sql($sql, ['course' => $filters->course, 'course1' => $filters->course, 'itemtype' => "mod"]);
-
+        $grades = $DB->get_records_sql($sql, ['course' => $filters->course, 'itemtype' => "mod"], IGNORE_MULTIPLE);
 
         // Calculating timespent.
         $sql = "SELECT cm.id, SUM(eal.timespent) totaltime

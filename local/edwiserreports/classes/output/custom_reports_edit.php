@@ -156,7 +156,8 @@ class custom_reports_edit implements renderable, templatable {
     public function get_custom_report_custom_user_fields($selectedfield, $userfields) {
         global $DB, $CFG;
 
-        $rtl = get_string('thisdirection', 'langconfig') == 'rtl' ? 1: 0;
+        $rtl = get_string('thisdirection', 'langconfig');
+        $rtl = $rtl == 'rtl' ? 1: 0;
 
         // Social labels.
         $socialstringplugin = $CFG->branch < 311 ? 'moodle' : 'profilefield_social';
@@ -199,13 +200,11 @@ class custom_reports_edit implements renderable, templatable {
                     $name = $field->name;
                     if ($field->param3 == '1') {
                         $fielddata['resultfunc'] = function($value) {
-                            $rtl = get_string('thisdirection', 'langconfig') == 'rtl' ? 1: 0;
 
                             return $value ? ($rtl ? date('A i:g Y M d', $value) : date('d M Y g:i A', $value)) : '-';
                         };
                     } else {
                         $fielddata['resultfunc'] = function($value) {
-                            $rtl = get_string('thisdirection', 'langconfig') == 'rtl' ? 1: 0;
 
                             return $value ? ($rtl ? date('Y M d', $value) : date('d M Y', $value)) : '-';
                         };

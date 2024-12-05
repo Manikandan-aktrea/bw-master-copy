@@ -238,10 +238,6 @@ class learnercourseprogress extends base {
             'coursemodule' => 'course_module'
         ]);
 
-
-
-
-
         // Attempted activities.
         $sql = "SELECT ct.tempid id, COUNT(DISTINCT lsl.contextinstanceid) attempt
                   FROM {{$coursetable}} ct
@@ -323,7 +319,7 @@ class learnercourseprogress extends base {
                     $visits[$id] = (object) ['visits' => 0, 'lastaccess' => 0];
                 }
                 if (!isset($attempts[$id])) {
-                    $attempts[$id] = (object) ['attempt' => 0];
+                    $attempts[$id] = (object) ['attemp' => 0];
                 }
                 $timespent = isset($timespents[$id]) ? $timespents[$id]->timespent : 0;
                 $data = [
